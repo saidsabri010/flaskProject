@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+    <style>
+    body{
+        background: white;
+    }
+</style>
+    <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+        <a class="btn btn-success" href="{{ url_for('predictshow') }}" role="button">Predict new patient</a>
+       <a class="btn btn-info" href="{{ url_for('plot') }}" role="button">Visualization</a>
+     <a class="btn btn-primary" href="{{ url_for('model1') }}" role="button">Back</a>
+  </div>
+</nav>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">pregnancies</th>
+      <th scope="col">glucose</th>
+      <th scope="col">bloodPressure</th>
+      <th scope="col">skinThickness</th>
+      <th scope="col">insulin</th>
+      <th scope="col">bMI</th>
+      <th scope="col">diabetesPedigreeFunction</th>
+      <th scope="col">age</th>
+      <th scope="col">outcome</th>
+        <th scope="col">edit</th>
+        <th scope="col">delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for patient in patients %}
+    <tr>
+      <th scope="row">{{ patient.id }}</th>
+      <td>{{ patient.pregnancies }}</td>
+      <td>{{ patient.glucose }}</td>
+      <td>{{ patient.bloodPressure }}</td>
+      <td>{{ patient.skinThickness }}</td>
+      <td>{{ patient.insulin }}</td>
+      <td>{{ patient.bMI }}</td>
+      <td>{{ patient.diabetesPedigreeFunction }}</td>
+      <td>{{ patient.age }}</td>
+      <td>{{ patient.outcome }}</td>
+      <td><a class="btn btn-primary" href="/editshow/{{ patient.id }}" role="button">Edit</a></td>
+       <td><a class="btn btn-danger" onclick="return confirm('Are You Sure To Delete ?')" href="/delete/{{patient.id}}" role="button">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

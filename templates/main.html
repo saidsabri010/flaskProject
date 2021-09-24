@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+.container {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* margin is -0.5 * dimension */
+    margin-top: -25px;
+}
+
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+#mydiv{ animation: changeBg 5s infinite;
+    background-size: cover;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+@keyframes changeBg{
+   0% {background-image: url("https://uni-eszterhazy.hu/img/main/egyetem.jpg");}
+   25% {background-image: url("https://hackernoon.com/hn-images/1*fD3qqMWNyfJ85XST9c1H2g.png");}
+   50% {background-image: url("https://www.informatec.com/sites/default/files/styles/medium/public/image-seperator/machine-learning-separator-1.jpg?itok=ycRLJQV9");}
+   75% {background-image: url("https://tedxashokau.com/wp-content/uploads/2020/10/Artificial-Intelligence.jpg");}
+   100%  {background-image: url("https://uni-eszterhazy.hu/img/main/egyetem.jpg");}
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div id='mydiv'>
+<div class="container">
+    <a class="btn btn-success" href="{{ url_for('register') }}" role="button">Sign up</a>
+<a class="btn btn-success" href="{{ url_for('login') }}" role="button">Log in</a>  </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

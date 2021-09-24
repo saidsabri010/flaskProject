@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="login">
+     <h1 style="text-align: center"><b>DIABETES</b> Class Prediction</h1>
+     <br>
+    <form action="{{url_for('predict')}}"method="Post">
+        <div class="form-group">
+    	<input class="form-control"  type="text" name="Pregnancies" placeholder="Pregnancies" required="required" />
+            <br>
+        <input class="form-control"  type="text" name="Glucose" placeholder="Glucose" required="required" />
+            <br>
+		<input class="form-control"  type="text" name="BloodPressure" placeholder="BloodPressure" required="required" />
+            <br>
+		<input class="form-control"  type="text" name="SkinThickness" placeholder="SkinThickness" required="required" />
+            <br>
+        <input class="form-control"  type="text" name="Insulin" placeholder="Insulin" required="required" />
+            <br>
+        <input class="form-control"  type="text" name="BMI" placeholder="BMI" required="required" />
+            <br>
+        <input class="form-control"  type="text" name="DiabetesPedigreeFunction" placeholder="DiabetesPedigreeFunction" required="required"/>
+        <br>
+        <input class="form-control"  type="text" name="Age" placeholder="Age" required="required" />
+            <br>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+            <a class="btn btn-success" href="{{ url_for('diabetes') }}">back</a>
+    </form>
+ </div>
+{% endblock %}

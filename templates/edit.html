@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="login">
+     <h1 style="text-align: center"><b>DIABETES</b> Class Prediction</h1>
+     <br>
+    {% for row in patients %}
+    <form action="{{url_for('edit')}}"method="POST">
+        <div class="form-group">
+          <input type="hidden"  name="id" value="{{row.id}}">
+    	<input class="form-control" value="{{ row.pregnancies }}"  type="text" name="Pregnancies" placeholder="Pregnancies" required="required" />
+            <br>
+        <input class="form-control" value="{{row.glucose}}"  type="text" name="Glucose" placeholder="Glucose" required="required" />
+            <br>
+		<input class="form-control" value="{{ row.bloodPressure }}"  type="text" name="BloodPressure" placeholder="BloodPressure" required="required" />
+            <br>
+		<input class="form-control" value="{{ row.skinThickness }}"  type="text" name="SkinThickness" placeholder="SkinThickness" required="required" />
+            <br>
+        <input class="form-control" value="{{ row.insulin }}"  type="text" name="Insulin" placeholder="Insulin" required="required" />
+            <br>
+        <input class="form-control"  value="{{ row.bMI }}"  type="text" name="BMI" placeholder="BMI" required="required" />
+            <br>
+        <input class="form-control" value="{{ row.diabetesPedigreeFunction }}"  type="text" name="DiabetesPedigreeFunction" placeholder="DiabetesPedigreeFunction" required="required"/>
+        <br>
+        <input class="form-control" value="{{ row.age }}"  type="text" name="Age" placeholder="Age" required="required" />
+            <br>
+        </div>
+         {% endfor %}
+        <button type="submit" class="btn btn-primary">Edit</button>
+            <a class="btn btn-success" href="{{ url_for('diabetes') }}">back</a>
+    </form>
+ </div>
+{% endblock %}
