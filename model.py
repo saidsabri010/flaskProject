@@ -4,9 +4,9 @@ module for student grade prediction
 import pandas as pd
 import tensorflow as tf
 import keras_tuner as kt  # pylint: disable=E0401
+from sklearn.preprocessing import StandardScaler
 from tensorflow import keras  # pylint: disable=E0401
 from sklearn.model_selection import train_test_split  # pylint: disable=E0401
-
 
 df = pd.read_csv('https://raw.githubusercontent.com/saidsabri010/credit_card_dataset/main/diabetes.csv')
 data_x = df.drop(columns=['Outcome'])
@@ -14,8 +14,9 @@ data_y = df['Outcome']
 
 x_train, x_test, y_train, y_test = train_test_split(data_x, data_y, test_size=0.2)
 
-x_train = tf.keras.utils.normalize(x_train)
-x_test = tf.keras.utils.normalize(x_test)
+sc = StandardScaler()
+x_train = sc.fit_transform(x_train)
+x_test = sc.transform(x_test)
 
 
 class KerasClassifier:

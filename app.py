@@ -16,8 +16,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret-key'
 db = SQLAlchemy(app)
 
-a = KerasClassifier()
-a.run_tuner()
+# a = KerasClassifier()
+# a.run_tuner()
 model = load_model("model.h5")
 
 login_manager = LoginManager()
@@ -140,24 +140,23 @@ def edit():
 @app.route('/predict', methods=['GET', 'POST'])
 @login_required
 def predict():
-    if request.method == 'POST':
-        float_features = [float(x) for x in request.form.values()]
-        features = [np.expand_dims(float_features, 0)]
-        prediction = model.predict(features)
-        pregnancies = request.form['Pregnancies']
-        glucose = request.form['Glucose']
-        bloodPressure = request.form['BloodPressure']
-        skinThickness = request.form['SkinThickness']
-        insulin = request.form['Insulin']
-        bMI = request.form['BMI']
-        diabetesPedigreeFunction = request.form['DiabetesPedigreeFunction']
-        age = request.form['Age']
-        outcome = format(np.argmax(prediction))
-        data = Data(pregnancies, glucose, bloodPressure, skinThickness, insulin, bMI,
-                    diabetesPedigreeFunction, age, outcome)
-        db.session.add(data)
-        db.session.commit()
-        return redirect(url_for('diabetes'))
+    float_features = [float(x) for x in request.form.values()]
+    features = np.expand_dims(float_features, 0)
+    prediction = model.predict(features)
+    pregnancies = request.form['Pregnancies']
+    glucose = request.form['Glucose']
+    bloodPressure = request.form['BloodPressure']
+    skinThickness = request.form['SkinThickness']
+    insulin = request.form['Insulin']
+    bMI = request.form['BMI']
+    diabetesPedigreeFunction = request.form['DiabetesPedigreeFunction']
+    age = request.form['Age']
+    outcome = np.argmax(prediction[0])
+    data = Data(pregnancies, glucose, bloodPressure, skinThickness, insulin, bMI,
+                diabetesPedigreeFunction, age, outcome)
+    db.session.add(data)
+    db.session.commit()
+    return redirect(url_for('diabetes'))
 
 
 @app.route('/login')
